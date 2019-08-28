@@ -1,0 +1,163 @@
+@font-face {
+    font-family: "Josefin Sans Regular";
+    src: url("../../lib/fonts/JosefinSans-Regular.ttf")
+}
+
+body {
+    text-align: center;
+    font-family: 'Josefin Sans Regular', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 14px;
+    overflow: scroll;
+}
+
+h1 {
+    margin-bottom: 0px;
+}
+
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+}
+
+#game-info {
+    font-size: 16px;
+    margin: 10px auto;
+    display: inline-block;
+}
+
+/* Board and Cells */
+#board {
+    margin: auto;
+    display: inline-grid;
+    grid-template-columns: repeat(8,min-content);
+    /* grid-gap: 1px 1px; */
+}
+
+.cell {
+    display: block;
+    border: 1px solid black;
+    padding: 1px;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.cell:hover {
+    background-color: rgb(238, 238, 238);
+}
+
+.cell-blue {
+    background-color: #0079CE;
+}
+
+.cell-blue:hover {
+    background-color: rgb(0, 133, 228);
+}
+
+.cell-red {
+    background-color: #DA4747;
+}
+
+.cell-red:hover {
+    background-color: rgb(248, 79, 79);
+}
+
+.cell-img,
+#info-img {
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.cell-dis .cell-img {
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+}
+
+.cell-sel .cell-img {
+    -webkit-filter: drop-shadow(0px 5px 15px black);
+    filter: drop-shadow(0px 5px 15px black);
+}
+
+.health-span {
+    background: transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: background 0.1s;
+}
+
+/* Unit Info */
+#unit-actions {
+    margin: 10px;
+}
+
+.unit-action-button {
+    display: inline-block;
+    position: relative;
+}
+
+.unit-action-button>span {
+    font-size: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+#unit-info {
+    display: inline-block;
+    position: relative;
+    min-height: 50px;
+    padding-top: 10px;
+    margin: 5px;
+    width: 300px;
+    border: 1px black solid;
+    text-align: center;
+}
+
+#info-img {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+/* End Turn */
+#end-turn {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 5px 5px 5px;
+
+    border: 2px black solid;
+    background: rgb(0, 149, 255);
+    
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#end-turn:hover {
+    background-color: rgb(25, 157, 252);
+}
+
+#end-turn:active {
+    background-color: rgb(72, 179, 255);
+}
+
+footer {
+    background: white;
+    padding: 10px;
+    text-align: left;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+}

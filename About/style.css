@@ -1,0 +1,37 @@
+@font-face {
+    font-family: "Josefin Sans Regular";
+    src: url("../lib/fonts/JosefinSans-Regular.ttf");
+}
+
+body {
+    font-family: 'Josefin Sans Regular', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: left;
+    background-color: rgb(119, 194, 238);
+}
+
+nav {
+    background-color: white;
+    margin: 0px;
+    padding: 0px;
+
+    text-align: center;
+    font-size: larger;
+}
+
+div#wrapper {
+    background-color: white;
+    margin: 0 auto;
+    padding: 10px 20px 20px 20px;
+
+    border: 2px solid black;
+
+    max-width: 800px;
+}
+
+figure {
+    text-align: center;
+}
+
+figcaption {
+    font-style: italic;
+}
