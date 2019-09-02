@@ -463,7 +463,7 @@ const Connection = {
         socket.emit("createReq", data);
     },
     JoinSubmitClick: function () {
-        key = $("#join-game-box>div>input").val();
+        key = $("#join-game-box>div>input").val().trim();
         if (!key) {
             return;
         }
