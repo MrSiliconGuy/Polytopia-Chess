@@ -46,15 +46,11 @@ const GamesGet = function (id) {
 // New Socket IO connection
 io.on("connection", function (socket) {
     // Log the connection
-    console.log("New Connection, ID: ", socket.id);
-    console.log("Socket Info:" +
-        "\n\tID: " + socket.id +
-        "\n\tAddress: " + socket.handshake.address +
-        "\n\tURL: " + socket.handshake.url);
+    console.log("New Connection:" + "ID: [" + socket.id + "] Address: [" + socket.handshake.address + "]");
     
     // User Disconnect
     socket.on("disconnect", function (data) {
-        console.log("User Disconnect: ", socket.id);
+        console.log("User Disconnect: [", socket.id + "]");
         for (let g = 0; g < Games.length; g++) {
             let game = Games[g];
             let allDisconnect = true;
@@ -62,14 +58,14 @@ io.on("connection", function (socket) {
                 if (game.players[i]) {
                     if (game.players[i] === socket.id) {
                         game.players[i] = null;
-                        console.log("Removing user from slot: " + i + " of game " + game.id);
+                        console.log("Removing [" + socket.id + "] from slot " + i + " of game [" + game.id + "]");
                     } else {
                         allDisconnect = false;
                     }
                 }
             }
             if (allDisconnect) {
-                console.log("All players have left game " + game.id + ", deleting game");
+                console.log("All players have left game [" + game.id + "], deleting game");
                 Games.splice(g, 1);
                 g--;
             }
@@ -103,7 +99,7 @@ io.on("connection", function (socket) {
             gameStarted: false
         };
         Games.push(newGame);
-        console.log("New Game created, id: " + newGame.id + ", user: " + socket.id);
+        console.log("New game [" + newGame.id + "] created by [" + socket.id + "]");
         userJoinGame(newGame.id, true);
     });
 
@@ -115,7 +111,7 @@ io.on("connection", function (socket) {
 
     // User ends their turn, alerting everyone else
     socket.on("turn", function (data) {
-        console.log("Turn for game: " + data.gameID + "Player: " + socket.id);
+        console.log("Turn completed for game [" + data.gameID + "] by [" + socket.id + "]");
         let game = GamesGet(data.gameID);
         // Verify that this is indeed the right turn
         if (game.players.indexOf(socket.id) === game.gameState.tribeToMove &&
@@ -156,7 +152,7 @@ io.on("connection", function (socket) {
                 message: "Game Full"
             });
         } else {
-            console.log("User Joined game ID: " + gameID + " at slot " + connSlot + " user: " + socket.id);
+            console.log("User [" + socket.id + "] joined game [" + gameID + "] at slot " + connSlot);
             let data = {
                 gameInitSetup: JSONUtil.pack(game.gameState),
                 playerNum: connSlot,
@@ -180,7 +176,7 @@ io.on("connection", function (socket) {
 
     // Start the game when everyone is done
     function gameStart(gameID) {
-        console.log("Starting Game: " + gameID);
+        console.log("Starting game [" + gameID + "]");
         let game = GamesGet(gameID);
         game.gameStarted = true;
         for (const playerID of game.players) {
