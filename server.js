@@ -46,11 +46,11 @@ const GamesGet = function (id) {
 // New Socket IO connection
 io.on("connection", function (socket) {
     // Log the connection
-    console.log("New Connection:" + "ID: [" + socket.id + "] Address: [" + socket.handshake.address + "]");
+    console.log("New Connection [" + socket.id + "] Address: [" + socket.handshake.address + "]");
     
     // User Disconnect
     socket.on("disconnect", function (data) {
-        console.log("User Disconnect: [", socket.id + "]");
+        console.log("User Disconnect [" + socket.id + "]");
         for (let g = 0; g < Games.length; g++) {
             let game = Games[g];
             let allDisconnect = true;
