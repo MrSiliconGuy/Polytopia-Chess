@@ -12,7 +12,6 @@
   "dependencies": {
     "base65536": "^2.0.2",
     "express": "^4.17.1",
-    "log-timestamp": "^0.3.0",
     "pako": "^1.0.10",
     "socket.io": "^2.2.0"
   }

@@ -1,10 +1,8 @@
 const express = require("express");
 const http = require("http");
-const path = require("path");
 const socketIO = require("socket.io");
 const pako = require("pako");
 const base65536 = require("base65536");
-const logtimestamp = require("log-timestamp");
 
 const PORT = 8080;
 
@@ -14,7 +12,7 @@ var io = socketIO(server);
 
 app.set('port', PORT);
 
-app.use("/polytopia", express.static(__dirname + "/"));
+app.use("/", express.static(__dirname + "/"));
 
 server.listen(PORT, function () {
     console.log("Starting server on port " + PORT);
