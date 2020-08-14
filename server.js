@@ -4,7 +4,7 @@ const socketIO = require("socket.io");
 const pako = require("pako");
 const base65536 = require("base65536");
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 var app = express();
 var server = http.Server(app);
