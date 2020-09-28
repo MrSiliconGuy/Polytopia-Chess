@@ -1,8 +1,5 @@
 {
     "trailingComma": "es5",
     "tabWidth": 4,
-    "semi": true,
-    "singleQuote": false,
-    "filepath": "**.ts",
-    "printWidth": 150
+    "printWidth": 160
 }

@@ -63,3 +63,4 @@ typings/
 # Extras
 startServer.sh
 .idea
+dist
