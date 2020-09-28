@@ -1,6 +1,4 @@
-"use-strict";
-
-var GameBoard;
+let GameBoard;
 let SelectedLoc = null;
 // For very specific case
 let VetLoc = null;

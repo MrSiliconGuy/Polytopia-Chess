@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Josefin Sans Regular";
-    src: url("../../lib/fonts/JosefinSans-Regular.ttf");
+    src: url("./lib/fonts/JosefinSans-Regular.ttf");
 }
 
 body {
@@ -8,12 +8,6 @@ body {
     font-family: "Josefin Sans Regular", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
     font-size: 14px;
     overflow: scroll;
-    margin: 0px;
-}
-
-#content {
-    height: 100%;
-    width: 100%;
 }
 
 h1 {
@@ -159,28 +153,11 @@ img {
 }
 
 footer {
-    /* background: white; */
+    background: white;
     padding: 10px;
     text-align: left;
     position: fixed;
     bottom: 0px;
     left: 0px;
     width: 100%;
-}
-
-.floating-box {
-    width: 50%;
-    height: 100px;
-    top: 25%;
-    left: 25%;
-    background: lightgray;
-    border: black 5px solid;
-    position: fixed;
-    display: flex;
-}
-
-#status-bar {
-    margin-top: 10px;
-    font-size: 24px;
-    background-color: lightgray;
 }

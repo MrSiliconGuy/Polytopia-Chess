@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Josefin Sans Regular";
-    src: url("../lib/fonts/JosefinSans-Regular.ttf");
+    src: url("./lib/fonts/JosefinSans-Regular.ttf");
 }
 
 body {

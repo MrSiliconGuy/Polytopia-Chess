@@ -11,7 +11,6 @@ const JSONUtil = {
 };
 
 var Cookies = (function () {
-    "use-strict";
     var _cookie = Cookies.noConflict();
     var ret = {};
 

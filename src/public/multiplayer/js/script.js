@@ -1,9 +1,4 @@
-"use-strict";
-// Yea, I'm sorry the code is very spaghetti
-
-const DEBUG = false;
-
-var GameBoard;
+let GameBoard;
 let SelectedLoc = null;
 // For very specific case
 let VetLoc = null;
@@ -19,12 +14,8 @@ $(document).ready(function () {
         }
     }
     Display.UpdateDisplay();
-
-    // Deleteable once finished
-    // if (DEBUG) {
-    //     Connection.CreateClick();
-    // }
 });
+
 $(document).keyup(function (e) {
     // Enter (Turn end)
     if (e.keyCode == 13) {
@@ -101,9 +92,7 @@ const Display = {
 
             $("#info-img").attr("src", "../lib/img/" + unitTribe.name + "/" + unit.type + ".png");
             $("#info-span1").html(Capitalize(unitTribe.name + " " + unit.type) + (isFriendly ? "" : " [ENEMY]"));
-            $("#info-span2").html(
-                unit.health + "/" + GameFuncs.unitMaxHealth(unit) + " HP. " + (unit.isVet ? "Veteran. " : "") + unit.kills + " kills"
-            );
+            $("#info-span2").html(unit.health + "/" + GameFuncs.unitMaxHealth(unit) + " HP. " + (unit.isVet ? "Veteran. " : "") + unit.kills + " kills");
         }
     },
 
@@ -435,10 +424,7 @@ const Connection = {
     },
     CreateSubmitClick: function () {
         let gameCode = "";
-        if (DEBUG)
-            gameCode =
-                "𢉸𡦥𐛁斃𠰌𤯟臧𦌊强雞𢟚揓碈䂀紬䚂𣲳𤉃𤣻篨𣌪𧀓𣝮𨇳哳仙𠂀嚫䃡韈𢔮幭夭𢘩𢫪𦓅𠤁𧀣眣譶𡺼𧤧𤔮𓀪ꌣ𤶹吏炥𨆶浖䈟𠮠𧿲𥦐𢩫𣓹𠬵椠𒂾今𧂟𦍎𐘤謴𖤵扩聅夵𡳑𤀁繗𤊐𥲉㩉𣰍𠶭筬𠝶趉閴䠪𢨺𧘼䢕毎𦬋𣈠顅汃滫傁敷𓊶𦹊𦑛𥿅矽𣰒𦮨硊㣙𥔺占𡯠𤨁錬𧸺𦺬𡳺𧕾𣱁𧒿䈴徝𦯔捝𣽵𧓖𧄥𤍱𤖧𦅁𧨐𠞏𦟆𦒖鎼𡏱𢁋𤒍绌𥨢蒕𢘌䏼蝔蓓諠㠌嶑𧾚蒨𓏾淣㙾𦨇𣽁";
-        else gameCode = $("#create-game-box>div>input").val();
+        gameCode = $("#create-game-box>div>input").val();
         // Test valid
         if (!gameCode) {
             alert("Invalid Game Code");
