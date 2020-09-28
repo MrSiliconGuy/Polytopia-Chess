@@ -1,5 +1,3 @@
-// Just a wrapper around js-cookie, with compression from jsonc
-// Requires js-cookie and jsonc
 const JSONUtil = {
     pack: function (data) {
         return Base65536.encode(pako.deflate(JSON.stringify(data)));
@@ -10,9 +8,9 @@ const JSONUtil = {
     },
 };
 
-var Cookies = (function () {
-    var _cookie = Cookies.noConflict();
-    var ret = {};
+let Cookies = (function () {
+    let _cookie = Cookies.noConflict();
+    let ret = {};
 
     ret.set = function (name, value, options, doAsync) {
         function set() {

@@ -1,5 +1,3 @@
-"use-strict";
-
 const EMPTY = {
     turn: 0,
     tribeOrder: ["xinxi", "imperius"],
@@ -32,10 +30,10 @@ const EMPTY = {
     },
 };
 
-var GameBoard;
+let GameBoard;
 
 $(function () {
-    var cookie;
+    let cookie;
     try {
         cookie = Cookies.getJSON("game-setup");
         if (cookie === undefined) {
@@ -47,29 +45,29 @@ $(function () {
         Clear(true);
     }
 
-    function C(e) {
+    function Click(event) {
         let id = $(this).attr("id");
-        let rClick = e.which == 3;
+        let rClick = event.which == 3;
         CellClick(id, rClick);
     }
 
     let lDown = false;
     let rDown = false;
     $(document.body)
-        .mousedown((e) => {
-            if (e.which === 3) {
+        .mousedown((event) => {
+            if (event.which === 3) {
                 rDown = true;
             } else {
                 lDown = true;
             }
         })
-        .mouseup((e) => {
+        .mouseup((event) => {
             lDown = false;
             rDown = false;
         })
         .contextmenu(() => false);
 
-    function H(e) {
+    function Hover(event) {
         if (lDown) {
             CellClick($(this).attr("id"), false);
         } else if (rDown) {
@@ -83,8 +81,8 @@ $(function () {
         for (let j = 0; j < 8; j++) {
             template = $($("#cell-template").html())
                 .attr("id", "cell-" + i + j)
-                .mousedown(C)
-                .mouseenter(H);
+                .mousedown(Click)
+                .mouseenter(Hover);
             $("#board").append(template);
         }
     }
@@ -100,39 +98,39 @@ const Capitalize = function (text) {
 function DrawBoard() {
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 8; j++) {
-            $cell(i, j).image.attr("src", "../../lib/img/blank.png");
+            $cell(i, j).image.attr("src", "../lib/img/blank.png");
             $cell(i, j).span.html("");
         }
     }
 
-    for (const t of GameBoard.tribes) {
-        for (const u of t.units) {
-            const loc = u.location;
-            $cell(loc[0], loc[1]).image.attr("src", "../../lib/img/" + t.name + "/" + u.type + ".png");
+    for (const tribe of GameBoard.tribes) {
+        for (const unit of tribe.units) {
+            const loc = unit.location;
+            $cell(loc[0], loc[1]).image.attr("src", "../lib/img/" + tribe.name + "/" + unit.type + ".png");
         }
     }
 }
 
 function CellClick(cellid, rightClick) {
     const loc = [$cell(cellid).x, $cell(cellid).y];
-    const tribe = $("#select-tribe").val();
-    const unit = $("#select-unit").val();
+    const selectedTribe = $("#select-tribe").val();
+    const selectedUnit = $("#select-unit").val();
     if (rightClick) {
         GameBoard = GameFuncs.removeUnitAt(GameBoard, loc);
     } else {
         if (GameFuncs.unitAt(GameBoard, loc) !== null) {
             GameBoard = GameFuncs.removeUnitAt(GameBoard, loc);
         }
-        for (let t of GameBoard.tribes) {
-            if (t.name == tribe) {
-                let u = {
+        for (let tribe of GameBoard.tribes) {
+            if (tribe.name === selectedTribe) {
+                let unit = {
                     location: loc,
-                    type: unit,
-                    health: UNITS[unit][2],
+                    type: selectedUnit,
+                    health: UNITS[selectedUnit][2],
                     isVet: false,
                     kills: 0,
                 };
-                t.units.push(u);
+                tribe.units.push(unit);
                 break;
             }
         }
@@ -160,7 +158,7 @@ function Clear(skipConfirm) {
 
 function ReturnToGameBoard() {
     SaveToCookie(false);
-    window.top.location.href = "../";
+    window.top.location.href = "../singleplayer";
 }
 
 function SaveToCookie(doAsync) {
@@ -248,15 +246,6 @@ function TribeOrder(event) {
         order[id] = selectedVal;
 
         TribeOrder();
-    }
-}
-
-function TribeOrderShowHide() {
-    if ($("#tribe-order").is(":visible")) {
-        $("#tribe-order").fadeOut("fast", () => $("#tribe-order-preview").show());
-    } else {
-        $("#tribe-order-preview").hide();
-        $("#tribe-order").fadeIn("fast");
     }
 }
 

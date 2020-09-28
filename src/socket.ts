@@ -10,7 +10,7 @@ const sio = SocketIO(server);
 
 let games: Game[];
 
-const maxNumberOfPlayers = 10;
+const maxNumberOfPlayers = 4;
 
 sio.on("connection", function (socket: Socket) {
     console.log(`New connection [${socket.id}], Address: [${socket.handshake.address}]`);
