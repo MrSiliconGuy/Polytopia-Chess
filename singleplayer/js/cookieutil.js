@@ -6,8 +6,8 @@ const JSONUtil = {
     },
 
     unpack: function (str) {
-        return JSON.parse(pako.inflate(Base65536.decode(str), {"to": "string"}));
-    }
+        return JSON.parse(pako.inflate(Base65536.decode(str), { to: "string" }));
+    },
 };
 
 var Cookies = (function () {
@@ -17,7 +17,7 @@ var Cookies = (function () {
 
     ret.set = function (name, value, options, doAsync) {
         function set() {
-            if (typeof (value) != "string") {
+            if (typeof value != "string") {
                 value = JSONUtil.pack(value);
             }
             _cookie.set(name, value, options);

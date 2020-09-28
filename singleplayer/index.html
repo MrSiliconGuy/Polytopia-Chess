@@ -1,81 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Polytopia Chess | Local</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="../lib/jquery-3.3.1.min.js"></script>
+        <script src="../lib/pako.min.js"></script>
+        <script src="../lib/base65536.min.js"></script>
+        <script src="../lib/js.cookie-2.2.0.min.js"></script>
+        <script src="../lib/polytopiachess.js"></script>
+        <script src="js/cookieutil.js"></script>
+        <script src="js/script.js"></script>
+    </head>
 
-<head>
-    <meta charset="utf-8">
-    <title>Polytopia Chess | Local</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="../lib/jquery-3.3.1.min.js"></script>
-    <script src="../lib/pako.min.js"></script>
-    <script src="../lib/base65536.min.js"></script>
-    <script src="../lib/js.cookie-2.2.0.min.js"></script>
-    <script src="../lib/polytopiachess.js"></script>
-    <script src="js/cookieutil.js"></script>
-    <script src="js/script.js"></script>
-</head>
-
-<body>
-    <header>
-        <h1>Polytopia Chess!</h1>
-        <p style="font-style:italic; margin: 5px; font-size: 14px">A chess-like game inspired by <a
-                href="http://midjiwan.com/polytopia.html">The
-                Battle of
-                Polytopia</a></p>
-    </header>
-    <div id="game-info">
-        Turn <span id="game-info-turn">0</span> | To Move: <span id="game-info-toMove">Bardur</span><br />
-        Moves: <span id="game-info-moves">0</span> | Attacks: <span id="game-info-attacks">0</span> | Any: <span
-            id="game-info-any">0</span>
-    </div>
-    <br />
-    <div id="board"> <template id="cell-template">
-            <div class="cell" onclick="UI.CellClick(this.id);">
-                <div style="position: relative;">
-                    <img class="cell-img" src="../lib/img/blank.png" />
-                    <span class="health-span"></span>
+    <body>
+        <header>
+            <h1>Polytopia Chess!</h1>
+            <p style="font-style: italic; margin: 5px; font-size: 14px;">
+                A chess-like game inspired by <a href="http://midjiwan.com/polytopia.html">The Battle of Polytopia</a>
+            </p>
+        </header>
+        <div id="game-info">
+            Turn <span id="game-info-turn">0</span> | To Move: <span id="game-info-toMove">Bardur</span><br />
+            Moves: <span id="game-info-moves">0</span> | Attacks: <span id="game-info-attacks">0</span> | Any: <span id="game-info-any">0</span>
+        </div>
+        <br />
+        <div id="board">
+            <template id="cell-template">
+                <div class="cell" onclick="UI.CellClick(this.id);">
+                    <div style="position: relative;">
+                        <img class="cell-img" src="../lib/img/blank.png" />
+                        <span class="health-span"></span>
+                    </div>
+                </div>
+            </template>
+        </div>
+        <div id="unit-box">
+            <div id="unit-info">
+                <img id="info-img" />
+                <span id="info-span1"></span> <br />
+                <span id="info-span2"></span>
+            </div>
+            <div id="unit-actions">
+                <div id="unit-action-recover" class="unit-action-button cell" onclick="UI.RecoverClick()">
+                    <img class="cell-img" src="../lib/img/head.png" />
+                    <span>Recover</span>
+                </div>
+                <div id="unit-action-heal" class="unit-action-button cell" onclick="UI.HealClick()">
+                    <img class="cell-img" src="../lib/img/head.png" />
+                    <span>Heal Units</span>
+                </div>
+                <div id="unit-action-vet" class="unit-action-button cell" onclick="UI.VetClick()">
+                    <img class="cell-img" src="../lib/img/head.png" />
+                    <span>Veteran</span>
+                </div>
+                <div id="unit-action-disband" class="unit-action-button cell" onclick="UI.DisbandClick()">
+                    <img class="cell-img" src="../lib/img/head.png" />
+                    <span>Disband</span>
                 </div>
             </div>
-        </template>
-    </div>
-    <div id="unit-box">
-        <div id="unit-info">
-            <img id="info-img" />
-            <span id="info-span1"></span> <br />
-            <span id="info-span2"></span>
         </div>
-        <div id="unit-actions">
-            <div id="unit-action-recover" class="unit-action-button cell" onclick="UI.RecoverClick()">
-                <img class="cell-img" src="../lib/img/head.png" />
-                <span>Recover</span>
-            </div>
-            <div id="unit-action-heal" class="unit-action-button cell" onclick="UI.HealClick()">
-                <img class="cell-img" src="../lib/img/head.png" />
-                <span>Heal Units</span>
-            </div>
-            <div id="unit-action-vet" class="unit-action-button cell" onclick="UI.VetClick()">
-                <img class="cell-img" src="../lib/img/head.png" />
-                <span>Veteran</span>
-            </div>
-            <div id="unit-action-disband" class="unit-action-button cell" onclick="UI.DisbandClick()">
-                <img class="cell-img" src="../lib/img/head.png" />
-                <span>Disband</span>
-            </div>
+        <p id="get-started">To get started, first create your own board setup</p>
+        <footer>
+            <a href="../About/" target="_blank">About</a> | <a href="Setup/">Make Board Setup</a> |
+            <a href="javascript:UI.ImportClick();" Import Game>Import</a> |
+            <a href="javascript:UI.ExportClick();">Export</a>
+            <input id="export-box" type="text" readonly="true" style="display: none;" /> |
+            <a href="javascript:UI.ClearGameClick();">Clear Game</a>
+        </footer>
+        <div id="end-turn" onclick="UI.EndTurnClick()">
+            <span>End Turn!</span>
         </div>
-    </div>
-    <p id="get-started">To get started, first create your own board setup</p>
-    <footer>
-        <a href="../About/" target="_blank">About</a> |
-        <a href="Setup/">Make Board Setup</a> |
-        <a href="javascript:UI.ImportClick();" Import Game>Import</a> |
-        <a href="javascript:UI.ExportClick();">Export</a>
-        <input id="export-box" type="text" readonly="true" style="display:none;" /> |
-        <a href="javascript:UI.ClearGameClick();">Clear Game</a>
-
-    </footer>
-    <div id="end-turn" onclick="UI.EndTurnClick()">
-        <span>End Turn!</span>
-    </div>
-</body>
-
+    </body>
 </html>

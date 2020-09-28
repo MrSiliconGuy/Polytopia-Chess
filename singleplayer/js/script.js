@@ -41,14 +41,13 @@ $(document).keyup(function (e) {
     if (e.keyCode == 13) {
         EndTurn();
     }
-    // Escape 
+    // Escape
     else if (e.keyCode == 27) {
         DeSelect();
     }
 });
 
-
-const Capitalize = text => text.replace(/\b\w/g, l => l.toUpperCase());
+const Capitalize = (text) => text.replace(/\b\w/g, (l) => l.toUpperCase());
 
 const Display = {
     // draw - functions directly related to drawing things on the HTML display
@@ -108,7 +107,9 @@ const Display = {
 
             $("#info-img").attr("src", "../lib/img/" + unitTribe.name + "/" + unit.type + ".png");
             $("#info-span1").html(Capitalize(unitTribe.name + " " + unit.type) + (isFriendly ? "" : " [ENEMY]"));
-            $("#info-span2").html(unit.health + "/" + GameFuncs.unitMaxHealth(unit) + " HP. " + (unit.isVet ? "Veteran. " : "") + unit.kills + " kills");
+            $("#info-span2").html(
+                unit.health + "/" + GameFuncs.unitMaxHealth(unit) + " HP. " + (unit.isVet ? "Veteran. " : "") + unit.kills + " kills"
+            );
         }
     },
 
@@ -163,7 +164,7 @@ const Display = {
                 $cell(i, j).cell.removeClass("cell-sel");
             }
         }
-    }
+    },
 };
 
 const UI = {
@@ -253,14 +254,14 @@ const UI = {
             GameBoard = GameFuncs.genMvtObjectsTribe(GameBoard);
         }
         $("#get-started").slideUp();
-		SaveToCookies(true);
+        SaveToCookies(true);
         Display.UpdateDisplay();
     },
     ExportClick: function () {
         $("#export-box").show();
         $("#export-box").val(JSONUtil.pack(GameBoard));
         $("#export-box").select();
-        $("#export-box").focusout(function() {
+        $("#export-box").focusout(function () {
             $("#export-box").fadeOut();
         });
     },
@@ -298,22 +299,27 @@ function EndTurn() {
     if (confirm("End Turn?")) {
         GameBoard = GameFuncs.endTurn(GameBoard);
         Cookies.remove("game");
-		SaveToCookies(true);
+        SaveToCookies(true);
         DeSelect();
         Display.UpdateDisplay();
     }
 }
 
 function SaveToCookies(doAsync) {
-	Cookies.set("game", GameBoard, {
-		expires: 30,
-		}, true);
+    Cookies.set(
+        "game",
+        GameBoard,
+        {
+            expires: 30,
+        },
+        true
+    );
 }
 
 // Helper function for interacting with Cell DOM :ok_hand:
 function $cell(x, y) {
     let cellID = "";
-    if (typeof (y) == "undefined") {
+    if (typeof y == "undefined") {
         var num = x.split("-")[1];
         x = parseInt(num.charAt(0));
         var y = parseInt(num.charAt(1));
@@ -327,6 +333,6 @@ function $cell(x, y) {
         image: image,
         span: span,
         x: x,
-        y: y
+        y: y,
     };
 }

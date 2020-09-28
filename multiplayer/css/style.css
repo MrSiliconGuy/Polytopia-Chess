@@ -1,11 +1,11 @@
 @font-face {
     font-family: "Josefin Sans Regular";
-    src: url("../../lib/fonts/JosefinSans-Regular.ttf")
+    src: url("../../lib/fonts/JosefinSans-Regular.ttf");
 }
 
 body {
     text-align: center;
-    font-family: 'Josefin Sans Regular', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: "Josefin Sans Regular", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
     font-size: 14px;
     overflow: scroll;
     margin: 0px;
@@ -38,7 +38,7 @@ img {
 #board {
     margin: auto;
     display: inline-grid;
-    grid-template-columns: repeat(8,min-content);
+    grid-template-columns: repeat(8, min-content);
     /* grid-gap: 1px 1px; */
 }
 
@@ -62,7 +62,7 @@ img {
 }
 
 .cell-blue {
-    background-color: #0079CE;
+    background-color: #0079ce;
 }
 
 .cell-blue:hover {
@@ -70,7 +70,7 @@ img {
 }
 
 .cell-red {
-    background-color: #DA4747;
+    background-color: #da4747;
 }
 
 .cell-red:hover {
@@ -111,7 +111,7 @@ img {
     position: relative;
 }
 
-.unit-action-button>span {
+.unit-action-button > span {
     font-size: 10px;
     position: absolute;
     bottom: 0;
@@ -144,7 +144,7 @@ img {
 
     border: 2px black solid;
     background: rgb(0, 149, 255);
-    
+
     -ms-user-select: none;
     -webkit-user-select: none;
     user-select: none;

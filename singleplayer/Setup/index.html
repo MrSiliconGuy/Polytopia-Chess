@@ -1,89 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Polytopia Chess | Setup</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="../../lib/jquery-3.3.1.min.js"></script>
+        <script src="../../lib/pako.min.js"></script>
+        <script src="../../lib/base65536.min.js"></script>
+        <script src="../../lib/js.cookie-2.2.0.min.js"></script>
+        <script src="../js/cookieutil.js"></script>
+        <script src="../../lib/polytopiachess.js"></script>
+        <script src="js/script.js"></script>
+    </head>
 
-<head>
-    <meta charset="utf-8">
-    <title>Polytopia Chess | Setup</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="../../lib/jquery-3.3.1.min.js"></script>
-    <script src="../../lib/pako.min.js"></script>
-    <script src="../../lib/base65536.min.js"></script>
-    <script src="../../lib/js.cookie-2.2.0.min.js"></script>
-    <script src="../js/cookieutil.js"></script>
-    <script src="../../lib/polytopiachess.js"></script>
-    <script src="js/script.js"></script>
-</head>
-
-<body>
-    <header>
-        <h1>Board Creator</h1>
-    </header>
-    <template id="tribe-order-template">
-        <span>
-            <select>
+    <body>
+        <header>
+            <h1>Board Creator</h1>
+        </header>
+        <template id="tribe-order-template">
+            <span>
+                <select>
+                    <option value="xinxi">Xinxi</option>
+                    <option value="imperius">Imperius</option>
+                    <option value="bardur">Bardur</option>
+                    <option value="oumaji">Oumaji</option>
+                </select>
+            </span>
+        </template>
+        <br />
+        <div id="tribe-order" style="display: none;">
+            Tribe Order:
+        </div>
+        <span id="tribe-order-preview"></span>
+        <br />
+        <div id="board-wrapper">
+            Left Click to place a unit, Right Click to remove <br />
+            <div id="board">
+                <template id="cell-template">
+                    <div class="cell">
+                        <img class="cell-img" />
+                    </div>
+                </template>
+            </div>
+            <br />
+            <a href="javascript:DefaultBoard();">Example Setup</a>
+            <select id="select-tribe">
                 <option value="xinxi">Xinxi</option>
                 <option value="imperius">Imperius</option>
                 <option value="bardur">Bardur</option>
                 <option value="oumaji">Oumaji</option>
             </select>
-        </span>
-    </template>
-    <br />
-    <div id="tribe-order" style="display: none;">
-        Tribe Order:
-    </div>
-    <span id="tribe-order-preview"></span>
-    <br />
-    <div id="board-wrapper">
-        Left Click to place a unit, Right Click to remove <br />
-        <div id="board">
-            <template id="cell-template">
-                <div class="cell">
-                    <img class="cell-img" />
-                </div>
-            </template>
+            <select id="select-unit">
+                <option value="warrior">Warrior</option>
+                <option value="rider">Rider</option>
+                <option value="defender">Defender</option>
+                <option value="swordsman">Swordsman</option>
+                <option value="archer">Archer</option>
+                <option value="catapult">Catapult</option>
+                <option value="knight">Knight</option>
+                <option value="giant">Giant</option>
+                <option value="boat">Boat</option>
+                <option value="ship">Ship</option>
+                <option value="battleship">Battleship</option>
+                <option value="mind-bender">Mind Bender</option>
+                <option value="amphibian">Amphibian</option>
+                <option value="crab">Crab</option>
+                <option value="tridention">Tridention</option>
+                <option value="polytaur">Polytaur</option>
+                <option value="navalon">Navalon</option>
+                <option value="dragon-egg">Dragon Egg</option>
+                <option value="baby-dragon">Baby Dragon</option>
+                <option value="fire-dragon">Fire Dragon</option>
+                <option value="nature-bunny">Nature Bunny</option>
+            </select>
+            <a href="javascript:Clear();">Clear Board</a>
         </div>
-        <br />
-        <a href="javascript:DefaultBoard();">Example Setup</a>
-        <select id="select-tribe">
-            <option value="xinxi">Xinxi</option>
-            <option value="imperius">Imperius</option>
-            <option value="bardur">Bardur</option>
-            <option value="oumaji">Oumaji</option>
-        </select>
-        <select id="select-unit">
-            <option value="warrior">Warrior</option>
-            <option value="rider">Rider</option>
-            <option value="defender">Defender</option>
-            <option value="swordsman">Swordsman</option>
-            <option value="archer">Archer</option>
-            <option value="catapult">Catapult</option>
-            <option value="knight">Knight</option>
-            <option value="giant">Giant</option>
-            <option value="boat">Boat</option>
-            <option value="ship">Ship</option>
-            <option value="battleship">Battleship</option>
-            <option value="mind-bender">Mind Bender</option>
-            <option value="amphibian">Amphibian</option>
-            <option value="crab">Crab</option>
-            <option value="tridention">Tridention</option>
-            <option value="polytaur">Polytaur</option>
-            <option value="navalon">Navalon</option>
-            <option value="dragon-egg">Dragon Egg</option>
-            <option value="baby-dragon">Baby Dragon</option>
-            <option value="fire-dragon">Fire Dragon</option>
-            <option value="nature-bunny">Nature Bunny</option>
-        </select>
-        <a href="javascript:Clear();">Clear Board</a>
-    </div>
 
-    <footer>
-        <a href="javascript:ReturnToGameBoard();">&lt;&lt;Save & Return to game</a> |
-        <span>
-            <a href="javascript:Copy();">Export</a>
-            <input id="copy-box" type="text" readonly="true" style="display:none;" />
-        </span>
-    </footer>
-</body>
-
+        <footer>
+            <a href="javascript:ReturnToGameBoard();">&lt;&lt;Save & Return to game</a> |
+            <span>
+                <a href="javascript:Copy();">Export</a>
+                <input id="copy-box" type="text" readonly="true" style="display: none;" />
+            </span>
+        </footer>
+    </body>
 </html>

@@ -19,7 +19,7 @@ $(document).ready(function () {
         }
     }
     Display.UpdateDisplay();
-    
+
     // Deleteable once finished
     // if (DEBUG) {
     //     Connection.CreateClick();
@@ -30,14 +30,13 @@ $(document).keyup(function (e) {
     if (e.keyCode == 13) {
         EndTurn();
     }
-    // Escape 
+    // Escape
     else if (e.keyCode == 27) {
         DeSelect();
     }
 });
 
-
-const Capitalize = text => text.replace(/\b\w/g, l => l.toUpperCase());
+const Capitalize = (text) => text.replace(/\b\w/g, (l) => l.toUpperCase());
 
 const Display = {
     // draw - functions directly related to drawing things on the HTML display
@@ -102,7 +101,9 @@ const Display = {
 
             $("#info-img").attr("src", "../lib/img/" + unitTribe.name + "/" + unit.type + ".png");
             $("#info-span1").html(Capitalize(unitTribe.name + " " + unit.type) + (isFriendly ? "" : " [ENEMY]"));
-            $("#info-span2").html(unit.health + "/" + GameFuncs.unitMaxHealth(unit) + " HP. " + (unit.isVet ? "Veteran. " : "") + unit.kills + " kills");
+            $("#info-span2").html(
+                unit.health + "/" + GameFuncs.unitMaxHealth(unit) + " HP. " + (unit.isVet ? "Veteran. " : "") + unit.kills + " kills"
+            );
         }
     },
 
@@ -157,7 +158,7 @@ const Display = {
                 $cell(i, j).cell.removeClass("cell-sel");
             }
         }
-    }
+    },
 };
 
 const UI = {
@@ -247,7 +248,7 @@ const UI = {
             GameBoard = GameFuncs.removeUnitAt(GameBoard, SelectedLoc);
             turnDeltas.push({
                 type: "disband",
-                spot: SelectedLoc
+                spot: SelectedLoc,
             });
             DeSelect();
             Display.UpdateDisplay();
@@ -301,7 +302,7 @@ function EndTurn() {
         let data = {
             deltas: JSONUtil.pack(turnDeltas),
             gameState: JSONUtil.pack(GameBoard),
-            gameID
+            gameID,
         };
         socket.emit("turn", data);
     }
@@ -310,7 +311,7 @@ function EndTurn() {
 // Helper function for interacting with Cell DOM :ok_hand:
 function $cell(x, y) {
     let cellID = "";
-    if (typeof (y) == "undefined") {
+    if (typeof y == "undefined") {
         var num = x.split("-")[1];
         x = parseInt(num.charAt(0));
         var y = parseInt(num.charAt(1));
@@ -324,7 +325,7 @@ function $cell(x, y) {
         image: image,
         span: span,
         x: x,
-        y: y
+        y: y,
     };
 }
 
@@ -353,7 +354,6 @@ function ReplayDeltas(deltas, gameState, callback) {
     });
 }
 
-
 // Connection Info
 let playerNum = -1;
 let myTurn = false;
@@ -361,7 +361,7 @@ let turnDeltas = [];
 let gameID = "";
 
 const socket = io();
-socket.on('err', function (data) {
+socket.on("err", function (data) {
     console.log(data.message);
     if (data.message === "Invalid Create Request") {
         alert("Unable to create game");
@@ -410,16 +410,16 @@ socket.on("turn", function (data) {
     }
 });
 function NextTurnState() {
-        if (GameBoard.tribeToMove === playerNum) {
-            myTurn = true;
-            turnDeltas = [];
-            $("#status-bar span").html("");
-            $("#status-bar").slideUp();
-        } else {
-            myTurn = false;
-            $("#status-bar").slideDown();
-            $("#status-bar span").html("Waiting for " + Capitalize(GameBoard.tribeOrder[GameBoard.tribeToMove]));
-        }
+    if (GameBoard.tribeToMove === playerNum) {
+        myTurn = true;
+        turnDeltas = [];
+        $("#status-bar span").html("");
+        $("#status-bar").slideUp();
+    } else {
+        myTurn = false;
+        $("#status-bar").slideDown();
+        $("#status-bar span").html("Waiting for " + Capitalize(GameBoard.tribeOrder[GameBoard.tribeToMove]));
+    }
 }
 
 const Connection = {
@@ -435,7 +435,9 @@ const Connection = {
     },
     CreateSubmitClick: function () {
         let gameCode = "";
-        if (DEBUG) gameCode = "𢉸𡦥𐛁斃𠰌𤯟臧𦌊强雞𢟚揓碈䂀紬䚂𣲳𤉃𤣻篨𣌪𧀓𣝮𨇳哳仙𠂀嚫䃡韈𢔮幭夭𢘩𢫪𦓅𠤁𧀣眣譶𡺼𧤧𤔮𓀪ꌣ𤶹吏炥𨆶浖䈟𠮠𧿲𥦐𢩫𣓹𠬵椠𒂾今𧂟𦍎𐘤謴𖤵扩聅夵𡳑𤀁繗𤊐𥲉㩉𣰍𠶭筬𠝶趉閴䠪𢨺𧘼䢕毎𦬋𣈠顅汃滫傁敷𓊶𦹊𦑛𥿅矽𣰒𦮨硊㣙𥔺占𡯠𤨁錬𧸺𦺬𡳺𧕾𣱁𧒿䈴徝𦯔捝𣽵𧓖𧄥𤍱𤖧𦅁𧨐𠞏𦟆𦒖鎼𡏱𢁋𤒍绌𥨢蒕𢘌䏼蝔蓓諠㠌嶑𧾚蒨𓏾淣㙾𦨇𣽁";
+        if (DEBUG)
+            gameCode =
+                "𢉸𡦥𐛁斃𠰌𤯟臧𦌊强雞𢟚揓碈䂀紬䚂𣲳𤉃𤣻篨𣌪𧀓𣝮𨇳哳仙𠂀嚫䃡韈𢔮幭夭𢘩𢫪𦓅𠤁𧀣眣譶𡺼𧤧𤔮𓀪ꌣ𤶹吏炥𨆶浖䈟𠮠𧿲𥦐𢩫𣓹𠬵椠𒂾今𧂟𦍎𐘤謴𖤵扩聅夵𡳑𤀁繗𤊐𥲉㩉𣰍𠶭筬𠝶趉閴䠪𢨺𧘼䢕毎𦬋𣈠顅汃滫傁敷𓊶𦹊𦑛𥿅矽𣰒𦮨硊㣙𥔺占𡯠𤨁錬𧸺𦺬𡳺𧕾𣱁𧒿䈴徝𦯔捝𣽵𧓖𧄥𤍱𤖧𦅁𧨐𠞏𦟆𦒖鎼𡏱𢁋𤒍绌𥨢蒕𢘌䏼蝔蓓諠㠌嶑𧾚蒨𓏾淣㙾𦨇𣽁";
         else gameCode = $("#create-game-box>div>input").val();
         // Test valid
         if (!gameCode) {
@@ -458,7 +460,7 @@ const Connection = {
         }
 
         let data = {
-            gameCode
+            gameCode,
         };
         socket.emit("createReq", data);
     },
@@ -469,7 +471,7 @@ const Connection = {
         }
 
         let data = {
-            key
+            key,
         };
         socket.emit("joinReq", data);
     },
@@ -481,6 +483,6 @@ const JSONUtil = {
     },
 
     unpack: function (str) {
-        return JSON.parse(pako.inflate(Base65536.decode(str), {"to": "string"}));
-    }
+        return JSON.parse(pako.inflate(Base65536.decode(str), { to: "string" }));
+    },
 };

@@ -5,30 +5,31 @@ const EMPTY = {
     tribeOrder: ["xinxi", "imperius"],
     tribeToMove: 0,
     boardSize: [8, 8],
-    tribes: [{
-        name: "imperius",
-        units: []
-    },
-    {
-        name: "xinxi",
-        units: [],
-    },
-    {
-        name: "bardur",
-        units: [],
-    },
-    {
-        name: "oumaji",
-        units: [],
-    },
+    tribes: [
+        {
+            name: "imperius",
+            units: [],
+        },
+        {
+            name: "xinxi",
+            units: [],
+        },
+        {
+            name: "bardur",
+            units: [],
+        },
+        {
+            name: "oumaji",
+            units: [],
+        },
     ],
     settings: {
         movements: {
             move: 2,
             attack: 2,
-            any: 1
-        }
-    }
+            any: 1,
+        },
+    },
 };
 
 var GameBoard;
@@ -54,16 +55,19 @@ $(function () {
 
     let lDown = false;
     let rDown = false;
-    $(document.body).mousedown(e => {
-        if (e.which === 3) {
-            rDown = true;
-        } else {
-            lDown = true;
-        }
-    }).mouseup(e => {
-        lDown = false;
-        rDown = false;
-    }).contextmenu(() => false);
+    $(document.body)
+        .mousedown((e) => {
+            if (e.which === 3) {
+                rDown = true;
+            } else {
+                lDown = true;
+            }
+        })
+        .mouseup((e) => {
+            lDown = false;
+            rDown = false;
+        })
+        .contextmenu(() => false);
 
     function H(e) {
         if (lDown) {
@@ -77,7 +81,10 @@ $(function () {
     let template;
     for (let i = 7; i >= 0; i--) {
         for (let j = 0; j < 8; j++) {
-            template = $($("#cell-template").html()).attr("id", "cell-" + i + j).mousedown(C).mouseenter(H);
+            template = $($("#cell-template").html())
+                .attr("id", "cell-" + i + j)
+                .mousedown(C)
+                .mouseenter(H);
             $("#board").append(template);
         }
     }
@@ -87,7 +94,7 @@ $(function () {
 });
 
 const Capitalize = function (text) {
-    return text.replace(/\b\w/g, l => l.toUpperCase());
+    return text.replace(/\b\w/g, (l) => l.toUpperCase());
 };
 
 function DrawBoard() {
@@ -123,7 +130,7 @@ function CellClick(cellid, rightClick) {
                     type: unit,
                     health: UNITS[unit][2],
                     isVet: false,
-                    kills: 0
+                    kills: 0,
                 };
                 t.units.push(u);
                 break;
@@ -157,15 +164,20 @@ function ReturnToGameBoard() {
 }
 
 function SaveToCookie(doAsync) {
-    Cookies.set("game-setup", GameBoard, {
-        expires: 30
-    }, doAsync);
+    Cookies.set(
+        "game-setup",
+        GameBoard,
+        {
+            expires: 30,
+        },
+        doAsync
+    );
 }
 
 // Helper function for interacting with Cell DOM :ok_hand:
 function $cell(x, y) {
     let cellID = "";
-    if (typeof (y) == "undefined") {
+    if (typeof y == "undefined") {
         var num = x.split("-")[1];
         x = parseInt(num.charAt(0));
         var y = parseInt(num.charAt(1));
@@ -179,7 +191,7 @@ function $cell(x, y) {
         image: image,
         span: span,
         x: x,
-        y: y
+        y: y,
     };
 }
 
@@ -202,12 +214,10 @@ function TribeOrder(event) {
             const tribe = order[i];
             addTemplate(tribe, i);
         }
-        const addRemoveHTML =
-            "<br/><a href='javascript:TribeOrder(true)'>Add Tribe</a> " +
-            "<a href='javascript:TribeOrder(false)'>Remove Tribe</a>";
+        const addRemoveHTML = "<br/><a href='javascript:TribeOrder(true)'>Add Tribe</a> " + "<a href='javascript:TribeOrder(false)'>Remove Tribe</a>";
         $("#tribe-order").append(addRemoveHTML);
 
-        let previewString = "Turn Order: <span style=\"font-weight: bold;\">";
+        let previewString = 'Turn Order: <span style="font-weight: bold;">';
         for (let i = 0; i < order.length; i++) {
             const t = order[i];
             previewString += Capitalize(t);
@@ -215,11 +225,11 @@ function TribeOrder(event) {
                 previewString += " &gt; ";
             }
         }
-        previewString += "</span> <a href=\"javascript:TribeOrderShowHide()\">Edit</a>";
+        previewString += '</span> <a href="javascript:TribeOrderShowHide()">Edit</a>';
         $("#tribe-order-preview").html(previewString);
 
         SaveToCookie(true);
-    } else if (typeof (event) == "boolean") {
+    } else if (typeof event == "boolean") {
         let order = GameBoard.tribeOrder;
         if (event) {
             order.push($($("#tribe-order-template").html()).find("select").val());
@@ -252,7 +262,8 @@ function TribeOrderShowHide() {
 
 function DefaultBoard() {
     if (!confirm("Are you sure you want to clear you current setup?")) return;
-    let DEFAULT = "𢉸𡲭蟍嗃𠘐髟淏𥬃𢌶𠦼監胇㮧藒殻㩀ꖈ𦫌嫝𣟽牘𧁤𣣞𧵡𤠃僦㰺梍𓆐𤜆𢝡醞冩㿤𢧘壙田恝𡎇𦮇𦤩珅䏚𢹵𣈨𦭴𠐳鷆鰱𓇳𡖆㭡𧁆𨓸𥕒暠𡐘𡭣𤽝殀𤇎暘𥨾𧮵𤊐𥒓𓎡𔔱馣欕𡆐䄸賺唕𥅟惊逆𣂬𦝈𤄽㳢𥐢𠺄娳𥋢消䔙𨓧廂迕𢞙䙡𓋐𦸴㪁𢮔𧔧𡃰𔐲蹟𢏺盿𤁉𢥇𧔩钊俻𢃏𣠒𤖒𤁌𦳕腖𠥆𡑉𧗞悬𡲽𣳦蒳𣞺誶餛𣠳𡲉𧀃𢼤𧊳槾喔𡨲朠喔𡨲朠喔𡨲朠𢚔𡨲枠尔𔗫𦡎茺濢𦹎茺濨𦥎茺濣顎垨𣫞𓌎穧𠦥𥞶勲䁿滆㺽𥌁𡉛𥘻𥃱𡮦𦔉𦨁㨓㠲𦂹吞偍𥣗𨏷㤗生ᕭ";
+    let DEFAULT =
+        "𢉸𡲭蟍嗃𠘐髟淏𥬃𢌶𠦼監胇㮧藒殻㩀ꖈ𦫌嫝𣟽牘𧁤𣣞𧵡𤠃僦㰺梍𓆐𤜆𢝡醞冩㿤𢧘壙田恝𡎇𦮇𦤩珅䏚𢹵𣈨𦭴𠐳鷆鰱𓇳𡖆㭡𧁆𨓸𥕒暠𡐘𡭣𤽝殀𤇎暘𥨾𧮵𤊐𥒓𓎡𔔱馣欕𡆐䄸賺唕𥅟惊逆𣂬𦝈𤄽㳢𥐢𠺄娳𥋢消䔙𨓧廂迕𢞙䙡𓋐𦸴㪁𢮔𧔧𡃰𔐲蹟𢏺盿𤁉𢥇𧔩钊俻𢃏𣠒𤖒𤁌𦳕腖𠥆𡑉𧗞悬𡲽𣳦蒳𣞺誶餛𣠳𡲉𧀃𢼤𧊳槾喔𡨲朠喔𡨲朠喔𡨲朠𢚔𡨲枠尔𔗫𦡎茺濢𦹎茺濨𦥎茺濣顎垨𣫞𓌎穧𠦥𥞶勲䁿滆㺽𥌁𡉛𥘻𥃱𡮦𦔉𦨁㨓㠲𦂹吞偍𥣗𨏷㤗生ᕭ";
     Cookies.set("game-setup", DEFAULT);
     GameBoard = Cookies.getJSON("game-setup");
     DrawBoard();

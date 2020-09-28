@@ -1,11 +1,11 @@
 @font-face {
     font-family: "Josefin Sans Regular";
-    src: url("../../css/fonts/JosefinSans-Regular.ttf")
+    src: url("../../css/fonts/JosefinSans-Regular.ttf");
 }
 
 body {
     text-align: center;
-    font-family: 'Josefin Sans Regular', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: "Josefin Sans Regular", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
     font-size: 14px;
 }
 
